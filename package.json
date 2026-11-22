@@ -1,0 +1,32 @@
+{
+  "name": "dongengku",
+  "version": "1.0.0",
+  "description": "DongengKu — bilingual children's story companion. Hybrid on-device (Gemini Nano) + cloud (Gemini) inference via Firebase AI Logic. #BuildHybridAI 2026 entry.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173 --strictPort --host 127.0.0.1",
+    "verify": "node scripts/verify.mjs",
+    "emulators": "firebase emulators:start --only auth,firestore",
+    "test": "node scripts/verify.mjs"
+  },
+  "keywords": [
+    "firebase",
+    "ai-logic",
+    "gemini-nano",
+    "hybrid-inference",
+    "children-stories"
+  ],
+  "author": "trapjack212",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "firebase": "^13.4.0"
+  },
+  "devDependencies": {
+    "firebase-tools": "^15.37.0",
+    "playwright-core": "^1.65.1",
+    "vite": "^8.3.8"
+  }
+}

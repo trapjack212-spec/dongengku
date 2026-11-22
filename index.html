@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DongengKu — bilingual children's story companion. Stories generated with Firebase AI Logic: on-device Gemini Nano first, cloud Gemini fallback."
+    />
+    <title>DongengKu — Teman Dongeng Anak | #BuildHybridAI 2026</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-emoji" aria-hidden="true">📚</span>
+        <div>
+          <h1>DongengKu</h1>
+          <p class="tagline" data-i18n="tagline">Teman dongeng anak — dibuat oleh AI, dibaca dengan cinta</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <span id="hybridPill" class="pill">…</span>
+        <button id="langToggle" class="btn ghost" type="button" aria-label="Switch language">EN</button>
+      </div>
+    </header>
+
+    <main>
+      <div id="demoBanner" class="demo-banner" hidden>
+        <strong>⚠️ <span data-i18n="demoBanner">MODE DEMO</span></strong>
+        <span id="demoBannerText"></span>
+      </div>
+
+      <section class="hero">
+        <p class="subtitle" data-i18n="subtitle">
+          Pilih tema, tokoh, dan usia. DongengKu menulis cerita baru untukmu — cepat di perangkatmu, lengkap dari cloud.
+        </p>
+        <details class="how">
+          <summary data-i18n="howHybrid">Cara kerja Hybrid AI</summary>
+          <p data-i18n="howHybridBody">
+            Cerita pendek &amp; penceritaan ulang diusahakan berjalan ON-DEVICE (Gemini Nano di Chrome, gratis &amp; privat).
+            Kalau perangkat belum siap, Firebase AI Logic otomatis beralih ke CLOUD (Gemini). Rute yang dipakai selalu
+            ditampilkan di bawah cerita.
+          </p>
+        </details>
+      </section>
+
+      <section class="generator" aria-label="Story generator">
+        <div class="field">
+          <h2 data-i18n="pickTheme">1. Pilih Tema</h2>
+          <div id="themePicker" class="chips"></div>
+        </div>
+        <div class="field">
+          <h2 data-i18n="pickCharacter">2. Pilih Tokoh</h2>
+          <div id="characterPicker" class="chips"></div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <h2 data-i18n="pickAge">3. Usia Pembaca</h2>
+            <div id="agePicker" class="chips"></div>
+          </div>
+          <div class="field">
+            <h2 data-i18n="pickLength">4. Panjang Cerita</h2>
+            <div id="lengthPicker" class="chips"></div>
+          </div>
+          <div class="field">
+            <h2 data-i18n="pickLang">5. Bahasa Cerita</h2>
+            <div id="storyLangPicker" class="chips"></div>
+          </div>
+        </div>
+
+        <button id="generateBtn" class="btn primary big" type="button" data-i18n="generate">
+          ✨ Buatkan Dongeng!
+        </button>
+        <p id="statusLine" class="status-line" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="storySection" class="story-card" aria-label="Story">
+        <h2 data-i18n="storyTitle">Dongengmu</h2>
+        <p id="storyMeta" class="muted small"></p>
+        <p id="routeBadge" class="route-badge" hidden></p>
+        <h3 id="storyTitle" class="story-title"></h3>
+        <p id="storyBody" class="story-body" data-i18n="emptyStory">
+          Dongengmu akan muncul di sini. Pilih tema &amp; tokoh, lalu tekan tombol di atas!
+        </p>
+        <p id="storyMoral" class="moral" hidden>
+          <strong data-i18n="moral">Pesan moral</strong>: <span id="moralText"></span>
+        </p>
+
+        <div id="storyActions" class="actions" hidden>
+          <button id="listenBtn" class="btn" type="button" data-i18n="listen">🔊 Bacakan</button>
+          <button id="retellBtn" class="btn" type="button" data-i18n="retell">🔁 Ceritakan Lagi (Singkat)</button>
+          <button id="saveBtn" class="btn fav" type="button" data-i18n="saveFav">❤️ Simpan ke Favorit</button>
+        </div>
+
+        <div id="retellBox" class="retell-box" hidden>
+          <h3 data-i18n="retellTitle">Ceritakan Lagi — versi singkat</h3>
+          <p id="retellText"></p>
+          <p id="retellMeta" class="muted small"></p>
+        </div>
+      </section>
+
+      <section class="library" aria-label="Favourites">
+        <h2 data-i18n="library">📚 Favoritku</h2>
+        <div id="libraryList" class="fav-grid"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p data-i18n="footer">
+        DongengKu — entri #BuildHybridAI 2026. Semua inferensi AI lewat Firebase AI Logic (on-device Gemini Nano +
+        cloud Gemini). Cerita hanya teks, tanpa gambar AI.
+      </p>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
