@@ -8,3 +8,4 @@ ui-debug.log
 firebase-debug.log
 *.log
 .DS_Store
+demo/.video-work/

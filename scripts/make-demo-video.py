@@ -101,9 +101,31 @@ def make_title_card(scene, out_path):
 
 
 def tts(text, out_path):
-    from gtts import gTTS
+    """Offline neural TTS via Piper (en_US-lessac-medium).
 
-    gTTS(text=text, lang="en").save(str(out_path))
+    gTTS was tried first but Google Translate TTS returns HTTP 429 for this
+    sandbox's egress IP; edge-tts is blocked by the egress proxy's TLS.
+    Piper runs fully offline once the voice model is downloaded.
+    """
+    import wave
+
+    from piper import PiperVoice
+
+    global _VOICE
+    if _VOICE is None:
+        model = WORK / "voices" / "en_US-lessac-medium.onnx"
+        _VOICE = PiperVoice.load(str(model))
+    wav_path = out_path.with_suffix(".wav")
+    with wave.open(str(wav_path), "wb") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(_VOICE.config.sample_rate)
+        for chunk in _VOICE.synthesize(text):
+            wf.writeframes(chunk.audio_int16_bytes)
+    run(["ffmpeg", "-y", "-v", "error", "-i", str(wav_path), str(out_path)])
+
+
+_VOICE = None
 
 
 def duration(path):

@@ -1,0 +1,27 @@
+1
+00:00:00,000 --> 00:00:05,860
+Meet DongengKu — a bilingual story companion for kids, built for the Build Hybrid AI hackathon.
+
+2
+00:00:06,760 --> 00:00:15,140
+Pick a theme, a character, an age, and a length. DongengKu writes a brand-new story in Indonesian or English, adapted to your child's reading level.
+
+3
+00:00:16,040 --> 00:00:27,940
+Here is a story about Raka, the little robot, and the star that lost its light. Look at the badge: it tells you exactly which AI served it — on-device Gemini Nano, or cloud Gemini — and how fast it was.
+
+4
+00:00:28,840 --> 00:00:41,150
+Short retellings run on-device first. They are quick, private, and free. They never leave the device when Gemini Nano is ready. If the device is not ready, Firebase AI Logic falls back to the cloud automatically.
+
+5
+00:00:42,050 --> 00:00:49,240
+Love a story? Save it to favourites. Stories are stored in Firestore under anonymous auth, so every child keeps their own library.
+
+6
+00:00:50,140 --> 00:00:58,550
+The whole app is bilingual — Indonesian and English, for the story and the interface. And parents can listen along: every story can be read aloud.
+
+7
+00:00:59,450 --> 00:01:05,990
+DongengKu — on-device first, cloud when needed. A story, always. Built with Firebase AI Logic.

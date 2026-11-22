@@ -1,6 +1,6 @@
 # DongengKu — Demo video plan (≤ 3 min, English narration)
 
-Target: ~75 seconds. Built from real Playwright screenshots of the working app
+Target: ~60 seconds (actual build: 60.6 s). Built from real Playwright screenshots of the working app
 (`demo/screenshots/`) + English TTS narration (gTTS) + ffmpeg. No AI video
 generation used. Upload the finished `dongengku-demo.mp4` to YouTube (public).
 
@@ -16,14 +16,17 @@ generation used. Upload the finished `dongengku-demo.mp4` to YouTube (public).
 | 5 | Screenshot `05-english.png` (English UI) | ~11 s | "The whole app is bilingual — Indonesian and English, for the story and the interface. And parents can listen along: every story can be read aloud." |
 | 6 | Title card (closing): "DongengKu — On-device first. Cloud when needed. A story, always." + repo note | ~7 s | "DongengKu — on-device first, cloud when needed. A story, always. Built with Firebase AI Logic." |
 
-Total ≈ 75 s (under the 3-minute Devpost limit).
+Total ≈ 61 s (under the 3-minute Devpost limit).
 
 ## Production notes
 
 - Screenshots: `npm run verify` regenerates them (1280×720).
-- Narration: gTTS (`en`), one MP3 per scene; durations measured with ffprobe and
-  used as the scene lengths; SRT subtitles generated from the same script
-  (`demo/subtitles.srt`).
+- Narration: Piper offline neural TTS (`en_US-lessac-medium`), one WAV per scene
+  converted to MP3; durations measured with ffprobe and used as the scene
+  lengths; SRT subtitles generated from the same script
+  (`demo/subtitles.srt`). (gTTS was tried first but Google Translate TTS
+  returns HTTP 429 for this sandbox's egress IP; edge-tts is blocked by the
+  egress proxy's TLS — Piper runs fully offline once the voice is downloaded.)
 - Assembly: `scripts/make-demo-video.sh` (ffmpeg `zoompan` stills + concat +
   burned-in caption line per scene + narration audio).
 - If re-recording with a real Firebase project: re-run `npm run verify` after

@@ -70,8 +70,8 @@ const BEATS = {
       en: "From that day on, the tree always greeted {name} whenever they passed by. The forest grew greener, and all who lived there lived in harmony.",
     },
     moral: {
-      id: "Pesan moral: menolong dengan hati yang tulus membuat dunia menjadi lebih indah.",
-      en: "The moral of the story: helping with a sincere heart makes the world more beautiful.",
+      id: "menolong dengan hati yang tulus membuat dunia menjadi lebih indah.",
+      en: "helping with a sincere heart makes the world more beautiful.",
     },
   },
   space: {
@@ -97,8 +97,8 @@ const BEATS = {
       en: "The little star shone again, brighter and happier. From then on, {name} always reminded every star to rest enough.",
     },
     moral: {
-      id: "Pesan moral: beristirahat itu penting, dan teman yang baik selalu mau membantu.",
-      en: "The moral of the story: rest matters, and a good friend is always willing to help.",
+      id: "beristirahat itu penting, dan teman yang baik selalu mau membantu.",
+      en: "rest matters, and a good friend is always willing to help.",
     },
   },
   ocean: {
@@ -124,8 +124,8 @@ const BEATS = {
       en: "{name} brought the jewel to the middle of the sea village, so everyone could enjoy its light. From then on, the ocean was never dark again.",
     },
     moral: {
-      id: "Pesan moral: kesabaran dan kerja sama bisa membuka jalan yang paling sulit sekalipun.",
-      en: "The moral of the story: patience and teamwork can open even the hardest path.",
+      id: "kesabaran dan kerja sama bisa membuka jalan yang paling sulit sekalipun.",
+      en: "patience and teamwork can open even the hardest path.",
     },
   },
   market: {
@@ -151,8 +151,8 @@ const BEATS = {
       en: "That night, the old seller shared free cakes with all the children who had helped. The market stayed joyful until late at night.",
     },
     moral: {
-      id: "Pesan moral: kebaikan kecil bisa menyalakan kebahagiaan yang besar.",
-      en: "The moral of the story: a small kindness can light up a great happiness.",
+      id: "kebaikan kecil bisa menyalakan kebahagiaan yang besar.",
+      en: "a small kindness can light up a great happiness.",
     },
   },
   mountain: {
@@ -178,8 +178,8 @@ const BEATS = {
       en: "{name} went home with a heart full of colour. At home, {name} told the whole tale, and everyone smiled as they listened.",
     },
     moral: {
-      id: "Pesan moral: menolong orang lain di tengah jalan tidak pernah membuat kita terlambat sampai pada impian.",
-      en: "The moral of the story: helping others along the way never makes us late to reach our dreams.",
+      id: "menolong orang lain di tengah jalan tidak pernah membuat kita terlambat sampai pada impian.",
+      en: "helping others along the way never makes us late to reach our dreams.",
     },
   },
   city: {
@@ -205,8 +205,8 @@ const BEATS = {
       en: "From then on, every building in the city raced to make a rooftop garden. The Future City became a green and friendly city.",
     },
     moral: {
-      id: "Pesan moral: satu benih kecil yang dirawat dengan sabar bisa mengubah seluruh kota.",
-      en: "The moral of the story: one small seed, cared for patiently, can change a whole city.",
+      id: "satu benih kecil yang dirawat dengan sabar bisa mengubah seluruh kota.",
+      en: "one small seed, cared for patiently, can change a whole city.",
     },
   },
 };
