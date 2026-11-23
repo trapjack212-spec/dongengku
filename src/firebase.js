@@ -38,7 +38,7 @@ import { firebaseConfig, isPlaceholderConfig } from "./firebase-config.js";
 
 // reCAPTCHA Enterprise site key for App Check (Fraud Defense registration
 // in the Firebase console). Public by design — fill in once the key exists.
-const RECAPTCHA_ENTERPRISE_SITE_KEY = "6Lf97y0uAAAAAF9YUon9iACg3aWJZmkt5_fwJTE8";
+const RECAPTCHA_ENTERPRISE_SITE_KEY = "6Lf97y0uAAAAAL9v2ZhiDD9f05uUJwAOVQf5A8Dv";
 
 export const FIREBASE_CONFIGURED = !isPlaceholderConfig(firebaseConfig);
 export const USE_EMULATOR =
