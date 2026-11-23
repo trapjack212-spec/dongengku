@@ -48,6 +48,7 @@ let app = null;
 let auth = null;
 let db = null;
 let ai = null;
+let appCheck = null;
 let appCheckReady = false;
 let signInPromise = null;
 
@@ -78,7 +79,7 @@ if (FIREBASE_CONFIGURED) {
       : null;
   if (provider) {
     try {
-      initializeAppCheck(app, { provider });
+      appCheck = initializeAppCheck(app, { provider });
       appCheckReady = true;
     } catch (err) {
       console.warn("[DongengKu] App Check init failed:", err);
@@ -109,7 +110,7 @@ if (FIREBASE_CONFIGURED) {
   );
 }
 
-export { app, auth, db, ai, appCheckReady };
+export { app, auth, db, ai, appCheck, appCheckReady };
 
 /** Sign in anonymously (lazy). Returns the uid, or null in demo mode. */
 export async function ensureSignedIn() {
