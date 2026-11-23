@@ -1,14 +1,14 @@
 /**
- * DongengKu — Firebase config (PLACEHOLDER).
+ * DongengKu — Firebase config.
  *
- * This file intentionally contains NO real credentials. Paste your web
- * app's config here after creating a Firebase project (see README.md
- * "Firebase console steps"), or set the same values as Vite env vars in
- * a `.env` file (see `.env.example`).
+ * Real project dongengku-97df9 is embedded as the fallback below (wired
+ * 2026-11-23). Firebase web API keys are public client identifiers, not
+ * secrets — the key ships inside the app bundle to every visitor anyway;
+ * security comes from Firestore rules + App Check, not from hiding it.
+ * Values in a local `.env` (VITE_FIREBASE_*) still take precedence.
  *
- * While the placeholder values below are present, the app runs in
- * DEMO MODE (offline template stories, local favourites) and makes no
- * Firebase calls.
+ * With a real config present, the app runs in LIVE MODE (Firebase AI Logic
+ * stories, Firestore favourites). Without one it falls back to DEMO MODE.
  */
 
 const env = import.meta.env;
