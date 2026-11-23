@@ -15,10 +15,12 @@ import {
 } from "./ai.js";
 import {
   FIREBASE_CONFIGURED,
+  app,
   saveStoryToFirestore,
   listStoriesFromFirestore,
   deleteStoryFromFirestore,
 } from "./firebase.js";
+import { getAppCheck, getToken } from "firebase/app-check";
 
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => [...document.querySelectorAll(sel)];
@@ -461,6 +463,33 @@ function renderLibrary() {
 }
 
 // ---------------------------------------------------------------------------
+// App Check debug (?debug=appcheck) — mints a fresh token on demand and
+// shows the outcome in the status line, so the exact token-chain failure
+// (reCAPTCHA execute, exchange, API) is visible without DevTools.
+// Only runs when the URL carries ?debug=appcheck; harmless otherwise.
+// ---------------------------------------------------------------------------
+
+async function debugAppCheck() {
+  if (new URLSearchParams(location.search).get("debug") !== "appcheck") return;
+  if (!FIREBASE_CONFIGURED || !app) {
+    setStatus("🔍 Debug App Check: Firebase belum dikonfigurasi.", "warn");
+    return;
+  }
+  setStatus("🔍 Debug App Check: minta token baru…", "");
+  try {
+    const token = await getToken(getAppCheck(app), true);
+    setStatus(
+      `✅ App Check OK — token ${token.token.slice(0, 20)}… berlaku sampai ${new Date(token.expireTimeMillis).toLocaleTimeString()}. Sekarang coba klik "Buatkan Dongeng!"`,
+      "ok"
+    );
+  } catch (err) {
+    console.error("[DongengKu] App Check debug failed:", err);
+    const detail = `${err?.code || ""} ${err?.message || err}`.slice(0, 400);
+    setStatus(`❌ App Check gagal: ${detail}`, "error");
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Boot
 // ---------------------------------------------------------------------------
 
@@ -491,4 +520,5 @@ function bindEvents() {
 applyI18n();
 bindEvents();
 initStatus();
+debugAppCheck();
 refreshFavourites();
