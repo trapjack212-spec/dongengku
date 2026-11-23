@@ -27,10 +27,18 @@ import {
   orderBy,
   serverTimestamp,
 } from "firebase/firestore";
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import {
+  initializeAppCheck,
+  ReCaptchaEnterpriseProvider,
+  ReCaptchaV3Provider,
+} from "firebase/app-check";
 import { getAI, GoogleAIBackend } from "firebase/ai";
 
 import { firebaseConfig, isPlaceholderConfig } from "./firebase-config.js";
+
+// reCAPTCHA Enterprise site key for App Check (Fraud Defense registration
+// in the Firebase console). Public by design — fill in once the key exists.
+const RECAPTCHA_ENTERPRISE_SITE_KEY = "6Lf97y0uAAAAAF9YUon9iACg3aWJZmkt5_fwJTE8";
 
 export const FIREBASE_CONFIGURED = !isPlaceholderConfig(firebaseConfig);
 export const USE_EMULATOR =
@@ -46,26 +54,38 @@ let signInPromise = null;
 if (FIREBASE_CONFIGURED) {
   app = initializeApp(firebaseConfig);
 
-  // App Check (required by Firebase AI Logic). In local development the
-  // debug provider is used: setting this flag makes the SDK print a debug
-  // token in the console, which the user registers in the Firebase console
-  // (App Check > Apps > Manage debug tokens). See README.
+  // App Check (required by Firebase AI Logic — without a valid token the
+  // AI calls are rejected with 401 "Firebase App Check token is invalid").
+  // The console registration for dongengku-web is Fraud Defense
+  // (reCAPTCHA Enterprise), so the Enterprise provider is used first.
+  // Site keys are public by design (they ship in the page source of any
+  // reCAPTCHA site), so the key is embedded as a fallback below, exactly
+  // like the Firebase web apiKey in firebase-config.js. A value in `.env`
+  // (VITE_RECAPTCHA_ENTERPRISE_SITE_KEY) still takes precedence.
   const isLocalhost =
     location.hostname === "localhost" || location.hostname === "127.0.0.1";
   if (isLocalhost) {
     self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
   }
-  const siteKey = import.meta.env.VITE_RECAPTCHA_V3_SITE_KEY;
-  if (siteKey) {
+  const enterpriseSiteKey =
+    import.meta.env.VITE_RECAPTCHA_ENTERPRISE_SITE_KEY ||
+    RECAPTCHA_ENTERPRISE_SITE_KEY;
+  const v3SiteKey = import.meta.env.VITE_RECAPTCHA_V3_SITE_KEY;
+  const provider = enterpriseSiteKey
+    ? new ReCaptchaEnterpriseProvider(enterpriseSiteKey)
+    : v3SiteKey
+      ? new ReCaptchaV3Provider(v3SiteKey)
+      : null;
+  if (provider) {
     try {
-      initializeAppCheck(app, { provider: new ReCaptchaV3Provider(siteKey) });
+      initializeAppCheck(app, { provider });
       appCheckReady = true;
     } catch (err) {
       console.warn("[DongengKu] App Check init failed:", err);
     }
   } else {
     console.warn(
-      "[DongengKu] No VITE_RECAPTCHA_V3_SITE_KEY set — App Check skipped. " +
+      "[DongengKu] No App Check site key set — App Check skipped. " +
         "AI Logic calls may be rejected once App Check is enforced. See README."
     );
   }
