@@ -10,7 +10,7 @@ pushes the public repo, and uploads the YouTube video.
 - **Platform:** Web (Chrome)
 - **Built with:** Firebase AI Logic (Gemini Nano 4 on-device + Gemini cloud), Firestore, Authentication (anonymous), App Check
 - **License:** Apache-2.0
-- **Public repo:** [PASTE GITHUB URL]
+- **Public repo:** https://github.com/trapjack212-spec/dongengku
 - **Demo video (YouTube):** [PASTE YOUTUBE URL]
 - **Hosted URL:** [PASTE HOSTING URL — strongly encouraged]
 
