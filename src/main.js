@@ -308,11 +308,15 @@ async function onGenerate() {
     );
   } catch (err) {
     console.error("[DongengKu] generate failed:", err);
-    // Surface the underlying cause in the UI (not just the console) so a
-    // failed generation names its own reason — e.g. an App Check or
-    // permission error code — instead of only the generic message.
-    const detail = err?.code || err?.message || "unknown";
-    setStatus(`${s.errorGenerate} (${detail})`, "error");
+    // Surface the underlying cause in the UI (not just the console). The
+    // Firebase AI SDK reports every failed cloud call as code "fetch-error";
+    // the real detail (HTTP status + server message, e.g. "[401 ...]" or
+    // "[403 ...]") lives in err.message, so show that part, not just the code.
+    const raw = err?.message || "";
+    const bracket = raw.indexOf("[");
+    const cause = (bracket >= 0 ? raw.slice(bracket) : raw).slice(0, 240);
+    const detail = [err?.code, cause].filter(Boolean).join(": ");
+    setStatus(`${s.errorGenerate} (${detail || "unknown"})`, "error");
   } finally {
     btn.disabled = false;
     btn.textContent = s.generate;
