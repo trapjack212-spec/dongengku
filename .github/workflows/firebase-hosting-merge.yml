@@ -1,0 +1,28 @@
+# DongengKu — auto-deploy to Firebase Hosting on every push to master.
+# Needs one repo secret: FIREBASE_SERVICE_ACCOUNT (JSON of a Firebase
+# service-account key with Hosting deploy rights — create it in the
+# Firebase console: Project Settings > Service accounts > Generate new
+# private key — then paste it at GitHub repo Settings > Secrets and
+# variables > Actions > New repository secret).
+# The Firebase web config is embedded in src/firebase-config.js, so the
+# build needs no .env and the deployed app runs in LIVE MODE.
+name: Deploy to Firebase Hosting on merge
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: dongengku-97df9
