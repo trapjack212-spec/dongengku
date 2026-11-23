@@ -308,7 +308,11 @@ async function onGenerate() {
     );
   } catch (err) {
     console.error("[DongengKu] generate failed:", err);
-    setStatus(s.errorGenerate, "error");
+    // Surface the underlying cause in the UI (not just the console) so a
+    // failed generation names its own reason — e.g. an App Check or
+    // permission error code — instead of only the generic message.
+    const detail = err?.code || err?.message || "unknown";
+    setStatus(`${s.errorGenerate} (${detail})`, "error");
   } finally {
     btn.disabled = false;
     btn.textContent = s.generate;
